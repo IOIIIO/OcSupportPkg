@@ -448,6 +448,18 @@ PatchUsbXhciPortLimit (
   );
 
 /**
+  Apply patch to disable PM on AICPM kext.
+
+  @param Context  Prelinked kernel context.
+
+  @return  RETURN_SUCCESS on success.
+**/
+RETURN_STATUS
+PatchDisableCPUPM(
+	IN OUT PRELINKED_CONTEXT* Context
+);
+
+/**
   Apply vendor patches to IOAHCIFamily kext to enable native features for third-party drives,
   such as TRIM on SSDs or hibernation support on 10.15.
 

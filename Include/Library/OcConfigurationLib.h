@@ -243,7 +243,8 @@
   _(BOOLEAN                     , PanicNoKextDump             ,     , FALSE  , ()) \
   _(BOOLEAN                     , PowerTimeoutKernelPanic     ,     , FALSE  , ()) \
   _(BOOLEAN                     , ThirdPartyDrives            ,     , FALSE  , ()) \
-  _(BOOLEAN                     , XhciPortLimit               ,     , FALSE  , ())
+  _(BOOLEAN                     , XhciPortLimit               ,     , FALSE  , ()) \
+  _(BOOLEAN                     , DisableCPUPM                ,     , FALSE  , ())
   OC_DECLARE (OC_KERNEL_QUIRKS)
 
 #define OC_KERNEL_CONFIG_FIELDS(_, __) \

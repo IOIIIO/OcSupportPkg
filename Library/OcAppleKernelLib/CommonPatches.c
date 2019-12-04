@@ -602,6 +602,63 @@ PatchUsbXhciPortLimit (
 
 STATIC
 UINT8
+mDisableCPUPMFind[] = {
+  0x74
+};
+
+STATIC
+UINT8
+mDisableCPUPMReplace[] = {
+  0xeb
+};
+
+STATIC
+PATCHER_GENERIC_PATCH
+mDisableCPUPMPatch = {
+  .Comment = DEBUG_POINTER("DisableCPUPM"),
+  .Base = "__ZN28AppleIntelCPUPowerManagement5startEP9IOService",
+  .Find = mDisableCPUPMFind,
+  .Mask = NULL,
+  .Replace = mDisableCPUPMReplace,
+  .ReplaceMask = NULL,
+  .Size = sizeof(mDisableCPUPMReplace),
+  .Count = 1,
+  .Skip = 0,
+  .Limit = 4096
+};
+
+RETURN_STATUS
+PatchDisableCPUPM(
+	IN OUT PRELINKED_CONTEXT* Context
+)
+{
+	RETURN_STATUS       Status;
+	PATCHER_CONTEXT  Patcher;
+
+	Status = PatcherInitContextFromPrelinked(
+		&Patcher,
+		Context,
+		"com.apple.driver.AppleIntelCPUPowerManagement"
+	);
+
+	if (!RETURN_ERROR(Status)) {
+		Status = PatcherApplyGenericPatch(&Patcher, &mRemoveUsbLimitIoP1Patch);
+		if (RETURN_ERROR(Status)) {
+			DEBUG((DEBUG_INFO, "OCAK: Failed to apply patch com.apple.driver.AppleIntelCPUPowerManagement - %r\n", Status));
+		}
+		else {
+			DEBUG((DEBUG_INFO, "OCAK: Patch success com.apple.driver.AppleIntelCPUPowerManagement\n"));
+		}
+	}
+	else {
+		DEBUG((DEBUG_INFO, "OCAK: Failed to find com.apple.driver.AppleIntelCPUPowerManagement - %r\n", Status));
+	}
+
+	return Status;
+}
+
+STATIC
+UINT8
 mIOAHCIBlockStoragePatchV1Find[] = {
   0x41, 0x50, 0x50, 0x4C, 0x45, 0x20, 0x53, 0x53, 0x44, 0x00
 };

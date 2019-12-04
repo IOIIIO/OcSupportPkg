@@ -252,6 +252,8 @@ ApplyKextPatches (
   PatchAppleCpuPmCfgLock (Context);
 
   PatchUsbXhciPortLimit (Context);
+  
+  PatchDisableCPUPM (Context);
 
   PatchThirdPartyDriveSupport (Context);
 

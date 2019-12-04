@@ -28,3 +28,4 @@ prelinkedkernel.unpack
 .gdb_history
 *.dmg
 *.chunklist
+/.vs
