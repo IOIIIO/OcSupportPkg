@@ -456,7 +456,7 @@ PatchUsbXhciPortLimit (
 **/
 RETURN_STATUS
 PatchDisableCPUPM(
-	IN OUT PRELINKED_CONTEXT* Context
+	IN OUT PRELINKED_CONTEXT  *Context
 );
 
 /**

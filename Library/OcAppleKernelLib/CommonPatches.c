@@ -629,7 +629,7 @@ mDisableCPUPMPatch = {
 
 RETURN_STATUS
 PatchDisableCPUPM(
-	IN OUT PRELINKED_CONTEXT* Context
+	IN OUT PRELINKED_CONTEXT  *Context
 )
 {
 	RETURN_STATUS       Status;
@@ -642,7 +642,7 @@ PatchDisableCPUPM(
 	);
 
 	if (!RETURN_ERROR(Status)) {
-		Status = PatcherApplyGenericPatch(&Patcher, &mRemoveUsbLimitIoP1Patch);
+		Status = PatcherApplyGenericPatch(&Patcher, &mDisableCPUPMPatch);
 		if (RETURN_ERROR(Status)) {
 			DEBUG((DEBUG_INFO, "OCAK: Failed to apply patch com.apple.driver.AppleIntelCPUPowerManagement - %r\n", Status));
 		}
